@@ -37,8 +37,8 @@ export default function Home() {
           height={37}
           priority
         />
+  
       </div>
-
       <div className={styles.grid}>
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
