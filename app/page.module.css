@@ -227,3 +227,42 @@
     transform: rotate(0deg);
   }
 }
+
+.fill {
+  border-radius: 25px;
+  border: 2px solid #ffffff;
+  padding: 20px;
+  width: auto;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 4rem 0;
+}
+
+.fill input[type=text] {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 10%;
+}
+
+.fill input[type=password] {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 10%;
+  text-size-adjust: 30px;
+}
+
+.fill input[type=submit] {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 10%;
+}
+
+.line{
+  width: 80%;
+  height: 47px;
+  border-top: 1px solid rgb(255, 255, 255);
+  margin: 0 10%;
+  position: absolute;
+  }
