@@ -5,12 +5,15 @@ import { usePathname } from 'next/navigation'
 
 function Header() {
   const currentPath = usePathname();
- console.log(currentPath);
+  
   return (
     <header>
-      <Link href={`/login`}>
+      { currentPath == '/login'?  null 
+      : <Link href={`/login`}>
         Login
-      </Link>
+        </Link>  
+    }
+      
     </header>
   )
 }
