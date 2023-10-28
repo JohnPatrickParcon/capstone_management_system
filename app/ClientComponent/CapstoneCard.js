@@ -1,10 +1,10 @@
 import React from 'react'
 
-function CapstoneCard({countryID, countryName}) {
+function CapstoneCard() {
   return (
     <section>
-        <h2>{countryName}</h2>
-        <p>{countryID}</p>
+        <h2>Title</h2>
+        <p>lorem ipsum</p>
     </section>
   )
 }

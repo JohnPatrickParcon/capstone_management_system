@@ -1,6 +1,7 @@
 "use client"
 import Link from 'next/link'
 import React from 'react'
+import { Button } from '@nextui-org/button'
 import { usePathname } from 'next/navigation'
 
 function Header() {
@@ -10,7 +11,7 @@ function Header() {
     <header>
       { currentPath == '/login'?  null 
       : <Link href={`/login`}>
-        Login
+          <Button color='primary'>Login</Button>
         </Link>  
     }
       
