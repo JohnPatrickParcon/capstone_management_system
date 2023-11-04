@@ -18,7 +18,7 @@ import {
 } from "@nextui-org/react";
 import {PlusIcon} from "./PlusIcon";
 import {VerticalDotsIcon} from "./VerticalDotsIcon";
-import { SearchIcon } from "./searchIcon";
+import { SearchIcon } from "./SearchIcon";
 import {ChevronDownIcon} from "./ChevronDownIcon";
 import {columns, users, statusOptions} from "./cData";
 import {capitalize} from "./cUtils";

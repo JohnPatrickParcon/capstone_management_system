@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import {Card, CardBody, Input, Button} from "@nextui-org/react";
 import { EyeFilledIcon } from '../ClientComponent/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../ClientComponent/EyeSlashFilledIcon';
+import { serverLogin } from "../api/serverLogin";
 
 function login() {
   const [email, setEmail] = useState("");
@@ -22,8 +23,12 @@ function login() {
     return validateEmail(email) ? false : true;
   }, [email]);
 
+  const loginHandler = () => {
+    serverLogin({email: email, password: password});
+  }
+
   return (
-    <form className='grid place-items-center mt-8'>  
+    <form onSubmit={loginHandler} action="/" className='grid place-items-center mt-8'>  
       <Card className='w-fit h-fit mx-4 md:w-5/12'>
         <CardBody className='flex flex-row flex-wrap gap-4'>
           <h1>Login</h1>
@@ -61,7 +66,7 @@ function login() {
               </button>}
           />
           
-          <Button radius="full" className="w-full bg-purple-600">Login</Button>
+          <Button type="submit" radius="full" className="w-full bg-purple-600">Login</Button>
         </CardBody>
       </Card>
     </form>
