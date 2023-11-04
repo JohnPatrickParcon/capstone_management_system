@@ -1,6 +1,5 @@
 "use client"
 
-import { supabase } from "@/lib/initSupabase"
 import CapstoneTable from "./ClientComponent/CapstoneTable"
 
 export default function Home() {

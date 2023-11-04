@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import {Card, CardBody, Input, Button} from "@nextui-org/react";
 import { EyeFilledIcon } from '../ClientComponent/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../ClientComponent/EyeSlashFilledIcon';
+import { serverSignup } from "../api/serverSignup";
 
 function signup() {
   const [email, setEmail] = useState("");
@@ -27,13 +28,17 @@ function signup() {
     if (confirmPassword === "") return false;
 
     return confirmPassword == password ? false : true
-  }, [confirmPassword]);
+  }, [password, confirmPassword]);
+
+  const signupHandler = () => {
+    serverSignup({email: email, password: password});
+  }
 
   return (
-    <form className='grid place-items-center mt-8'>
+    <form onSubmit={signupHandler} action="/" className='grid place-items-center mt-8'>
       <Card className='w-fit h-fit mx-4 md:w-5/12'>
         <CardBody className='flex flex-row flex-wrap gap-4'>
-          <h1>Login</h1>
+          <h1>Sign Up</h1>
           <Input
             isRequired
             isClearable
@@ -88,7 +93,7 @@ function signup() {
               </button>}
           />
 
-          <Button radius="full" className="w-full bg-purple-600">Sign Up</Button>
+          <Button type="submit" radius="full" className="w-full bg-purple-600">Sign Up</Button>
         </CardBody>
       </Card>
     </form>
