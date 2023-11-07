@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { checkSession } from '../api/checkSession'
+import { checkSession } from '../ServerActions/checkSession'
+import { logout } from '../ServerActions/logout'
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react"
 
 function NavbarComp() {
-  const [session, setSession] = useState({});
+  const [session, setSession] = useState(null);
   
   //current page
   const currentPath = usePathname();
@@ -19,6 +20,10 @@ function NavbarComp() {
     }
     sessionData();
   }, [])
+
+  const logoutHandler = () => {
+    logout();
+  }
 
   //component to render login/signup/dashboard buttons
   //uses currentPath and session as conditions
@@ -43,11 +48,18 @@ function NavbarComp() {
     }
     if (session != null) {
       return(
+        <>
+        <NavbarItem>
+          <Button onClick={logoutHandler} as={Link} color="secondary" href="/" variant="light">
+            Logout
+          </Button>
+        </NavbarItem>
         <NavbarItem>
           <Button as={Link} color="secondary" href="/dashboard" variant="light">
             Dashboard
           </Button>
         </NavbarItem>
+        </>
       )
     }
     else {

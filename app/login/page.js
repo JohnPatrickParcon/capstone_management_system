@@ -4,9 +4,9 @@ import { useState, useMemo } from "react";
 import {Card, CardBody, Input, Button} from "@nextui-org/react";
 import { EyeFilledIcon } from '../ClientComponent/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../ClientComponent/EyeSlashFilledIcon';
-import { serverLogin } from "../api/serverLogin";
+import { login } from "../ServerActions/login";
 
-function login() {
+function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,7 +24,7 @@ function login() {
   }, [email]);
 
   const loginHandler = () => {
-    serverLogin({email: email, password: password});
+    login({email: email, password: password});
   }
 
   return (
@@ -64,8 +64,7 @@ function login() {
                 <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />                
               )}
               </button>}
-          />
-          
+          />          
           <Button type="submit" radius="full" className="w-full bg-purple-600">Login</Button>
         </CardBody>
       </Card>
@@ -73,4 +72,4 @@ function login() {
   )
 }
 
-export default login
+export default page
