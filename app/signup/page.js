@@ -4,9 +4,9 @@ import { useState, useMemo } from "react";
 import {Card, CardBody, Input, Button} from "@nextui-org/react";
 import { EyeFilledIcon } from '../ClientComponent/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../ClientComponent/EyeSlashFilledIcon';
-import { serverSignup } from "../api/serverSignup";
+import { signup } from "../ServerActions/signup";
 
-function signup() {
+function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPasssword] = useState("");
@@ -31,7 +31,7 @@ function signup() {
   }, [password, confirmPassword]);
 
   const signupHandler = () => {
-    serverSignup({email: email, password: password});
+    signup({email: email, password: password});
   }
 
   return (
@@ -100,4 +100,4 @@ function signup() {
   )
 }
 
-export default signup
+export default page
