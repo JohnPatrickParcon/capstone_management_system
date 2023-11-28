@@ -1,5 +1,3 @@
-"use client"
-
 import CapstoneTable from "./ClientComponent/CapstoneTable"
 
 export default function Home() {

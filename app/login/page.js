@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import {Card, CardBody, Input, Button} from "@nextui-org/react";
 import { EyeFilledIcon } from '../ClientComponent/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../ClientComponent/EyeSlashFilledIcon';
-import { login } from "../ServerActions/login";
+import { login } from "../ServerActions/auth";
 
 function page() {
   const [email, setEmail] = useState("");

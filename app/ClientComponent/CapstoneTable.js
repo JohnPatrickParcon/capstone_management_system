@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect, useMemo } from "react";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Pagination} from "@nextui-org/react";
 import { showCapstones } from "../ServerActions/showCapstones";
@@ -6,12 +8,12 @@ export default function CapstoneTable() {
   const [rows, setRows] = useState([]);
   const columns = [
     {
-      key: "name",
-      label: "COUNTRY",
+      key: "title",
+      label: "TITLE",
     },
     {
-      key: "continent",
-      label: "CONTINENT",
+      key: "status",
+      label: "STATUS",
     },
   ];
   const [page, setPage] = useState(1);
@@ -63,7 +65,7 @@ export default function CapstoneTable() {
 
       <TableBody emptyContent={"No rows to display"} items={items}>
         {(item) => (
-          <TableRow key={item.name}>
+          <TableRow key={item.title}>
             {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
           </TableRow>
         )}
