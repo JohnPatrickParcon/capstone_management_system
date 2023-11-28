@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Providers>
         <div className='h-screen bg-green-700'>
-          <NavbarComp/>
+          <NavbarComp/>            
           {children}
         </div>
         </Providers>

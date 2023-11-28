@@ -1,15 +1,16 @@
 "use client"
 
 import { useState, useMemo } from "react";
-import {Card, CardBody, Input, Button} from "@nextui-org/react";
+import {Card, CardBody, Input, Button, RadioGroup, Radio} from "@nextui-org/react";
 import { EyeFilledIcon } from '../ClientComponent/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../ClientComponent/EyeSlashFilledIcon';
-import { signup } from "../ServerActions/signup";
+import { signup } from "../ServerActions/auth";
 
 function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPasssword] = useState("");
+  const [userType, setUserType] = useState("");
 
   //for eye icon on password input
   const [isVisible, setIsVisible] = useState(false);
@@ -31,7 +32,7 @@ function page() {
   }, [password, confirmPassword]);
 
   const signupHandler = () => {
-    signup({email: email, password: password});
+    signup({email: email, password: password, userType: userType});
   }
 
   return (
@@ -39,6 +40,7 @@ function page() {
       <Card className='w-fit h-fit mx-4 md:w-5/12'>
         <CardBody className='flex flex-row flex-wrap gap-4'>
           <h1>Sign Up</h1>
+
           <Input
             isRequired
             isClearable
@@ -84,14 +86,19 @@ function page() {
             className="w-full"
             value={confirmPassword}
             onValueChange={setConfirmPasssword}
-            endContent={ <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
-              {isVisible ? (
-                <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-              ) : (
-                <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />                
-              )}
-              </button>}
           />
+
+          <RadioGroup
+            className="flex flex-row gap-4"
+            isRequired
+            orientation="horizontal"
+            label="Are you a"
+            value={userType}
+            onValueChange={setUserType}
+            color="secondary">
+              <Radio value="faculty">Faculty</Radio>
+              <Radio value="student">Student</Radio>
+          </RadioGroup>
 
           <Button type="submit" radius="full" className="w-full bg-purple-600">Sign Up</Button>
         </CardBody>
