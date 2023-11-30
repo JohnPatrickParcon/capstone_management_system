@@ -1,8 +1,11 @@
-import React from 'react'
+import StudentDashboard from './StudentDashboard'
 
 function page() {
   return (
-    <div>Dashboard</div>
+    <>
+      <div>Dashboard</div>
+      <StudentDashboard/>
+    </>
   )
 }
 

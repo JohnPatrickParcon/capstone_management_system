@@ -8,6 +8,7 @@ import { signup } from "../ServerActions/auth";
 
 function page() {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPasssword] = useState("");
   const [userType, setUserType] = useState("");
@@ -31,8 +32,13 @@ function page() {
     return confirmPassword == password ? false : true
   }, [password, confirmPassword]);
 
+  const isNameInvalid = useMemo(() => {
+
+    return name != "" ? false : true
+  }, [name]);
+
   const signupHandler = () => {
-    signup({email: email, password: password, userType: userType});
+    signup({email: email, name: name, password: password, userType: userType});
   }
 
   return (
@@ -54,6 +60,20 @@ function page() {
             className="w-full"
             value={email}
             onValueChange={setEmail}
+          />
+
+          <Input
+            isRequired
+            isClearable
+            type="text"
+            label="Name"
+            variant="faded"
+            placeholder="John Doe"
+            color={isNameInvalid ? "danger" : "default"}
+            errorMessage={isNameInvalid && "Please enter name"}
+            className="w-full"
+            value={name}
+            onValueChange={setName}
           />
 
           <Input
