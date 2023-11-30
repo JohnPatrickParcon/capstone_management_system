@@ -1,7 +1,7 @@
 import './globals.css'
 import { Providers } from './providers'
 import { Inter } from 'next/font/google'
-import NavbarComp from './ClientComponent/NavComp'
+import NavHeader from './ClientComponent/NavHeader'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Providers>
         <div className='h-screen bg-green-700'>
-          <NavbarComp/>            
+          <NavHeader/>
           {children}
         </div>
         </Providers>

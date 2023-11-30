@@ -6,7 +6,7 @@ import { EyeFilledIcon } from '../ClientComponent/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../ClientComponent/EyeSlashFilledIcon';
 import { login } from "../ServerActions/auth";
 
-function page() {
+function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,12 +23,12 @@ function page() {
     return validateEmail(email) ? false : true;
   }, [email]);
 
-  const loginHandler = () => {
-    login({email: email, password: password});
+  const loginHandler = async () => {
+    await login({email: email, password: password});
   }
-
+  
   return (
-    <form onSubmit={loginHandler} action="/" className='grid place-items-center mt-8'>  
+    <form onSubmit={loginHandler} action='/' className='grid place-items-center mt-8'>  
       <Card className='w-fit h-fit mx-4 md:w-5/12'>
         <CardBody className='flex flex-row flex-wrap gap-4'>
           <h1>Login</h1>
@@ -72,4 +72,4 @@ function page() {
   )
 }
 
-export default page
+export default LoginForm
