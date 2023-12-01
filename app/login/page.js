@@ -23,7 +23,10 @@ function LoginForm() {
     return validateEmail(email) ? false : true;
   }, [email]);
 
-  const loginHandler = async () => {
+  //const loginHandler = async () => {
+  //  await login({email: email, password: password});
+  //}
+  async function loginHandler(){
     await login({email: email, password: password});
   }
   

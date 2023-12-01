@@ -17,7 +17,6 @@ function NavbarComp() {
     getSession();
   }, [currentPath])
 
-  console.log(session);
   const logoutHandler = () => {
     logout();
   }  

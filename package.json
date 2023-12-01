@@ -10,9 +10,8 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.1.13",
+    "@supabase/ssr": "^0.0.10",
     "@supabase/supabase-js": "^2.39.0",
-    "@tanstack/react-query": "^5.10.0",
-    "@tanstack/react-query-devtools": "^5.10.0",
     "date-fns": "^2.30.0",
     "eslint": "8.52.0",
     "eslint-config-next": "^14.0.1",
