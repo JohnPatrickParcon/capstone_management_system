@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useMemo } from "react";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Pagination} from "@nextui-org/react";
-import { showCapstones } from "../ServerActions/showCapstones";
+import { createSupabaseBrowserClient } from "../../lib/createSupabaseBrowserClient";
+
+const supabase = createSupabaseBrowserClient()
 
 export default function CapstoneTable() {
   const [rows, setRows] = useState([]);
@@ -34,8 +36,10 @@ export default function CapstoneTable() {
   //result goes to const rows
   useEffect(() => {
     const getData = async () => {  
-      const result = await showCapstones();
-      setRows(result);
+      const { data, error } = await supabase
+      .from('capstones')
+      .select('title, status')
+      setRows(data);
       }
     getData();
   }, []);

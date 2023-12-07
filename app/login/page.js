@@ -1,14 +1,19 @@
 "use client"
 
-import { useState, useMemo } from "react";
-import {Card, CardBody, Input, Button} from "@nextui-org/react";
+import { useState, useMemo, use, useEffect } from "react";
+import { Card, CardBody, Input, Button } from "@nextui-org/react";
+import toast from "react-hot-toast";
 import { EyeFilledIcon } from '../ClientComponent/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../ClientComponent/EyeSlashFilledIcon';
-import { login } from "../ServerActions/auth";
+import { createSupabaseBrowserClient } from "../../lib/createSupabaseBrowserClient";
+import { useRouter } from "next/navigation";
+
+const supabase = createSupabaseBrowserClient();
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter()
 
   //for eye icon on password input
   const [isVisible, setIsVisible] = useState(false);
@@ -23,15 +28,21 @@ function LoginForm() {
     return validateEmail(email) ? false : true;
   }, [email]);
 
-  //const loginHandler = async () => {
-  //  await login({email: email, password: password});
-  //}
-  async function loginHandler(){
-    await login({email: email, password: password});
+  const loginHandler = async () => {
+    const {data, error} = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+    if (data?.session) {
+      router.push('/')
+    }
+    if (error) {
+      toast.error(error?.message)
+    }
   }
-  
+
   return (
-    <form onSubmit={loginHandler} action='/' className='grid place-items-center mt-8'>  
+    <form action={loginHandler} className='grid place-items-center mt-8'>  
       <Card className='w-fit h-fit mx-4 md:w-5/12'>
         <CardBody className='flex flex-row flex-wrap gap-4'>
           <h1>Login</h1>
@@ -49,7 +60,6 @@ function LoginForm() {
             value={email}
             onValueChange={setEmail}
           />
-
           <Input
             isRequired
             type={isVisible ? "text" : "password"}
