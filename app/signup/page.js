@@ -4,7 +4,11 @@ import { useState, useMemo } from "react";
 import {Card, CardBody, Input, Button, RadioGroup, Radio} from "@nextui-org/react";
 import { EyeFilledIcon } from '../ClientComponent/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '../ClientComponent/EyeSlashFilledIcon';
-import { signup } from "../ServerActions/auth";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { createSupabaseBrowserClient } from "../../lib/createSupabaseBrowserClient";
+
+const supabase = createSupabaseBrowserClient();
 
 function page() {
   const [email, setEmail] = useState("");
@@ -12,6 +16,7 @@ function page() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPasssword] = useState("");
   const [userType, setUserType] = useState("");
+  const router = useRouter();
 
   //for eye icon on password input
   const [isVisible, setIsVisible] = useState(false);
@@ -37,16 +42,30 @@ function page() {
     return name != "" ? false : true
   }, [name]);
 
-  const signupHandler = () => {
-    signup({email: email, name: name, password: password, userType: userType});
+  const signupHandler = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          usertype: userType,
+          name: name,
+        },
+      },
+    });
+    if(data?.session){
+      router.push('/');
+    }
+    if(error){
+      toast.error(error?.message)
+    }
   }
 
   return (
-    <form onSubmit={signupHandler} action="/" className='grid place-items-center mt-8'>
+    <form action={signupHandler} className='grid place-items-center mt-8'>
       <Card className='w-fit h-fit mx-4 md:w-5/12'>
         <CardBody className='flex flex-row flex-wrap gap-4'>
           <h1>Sign Up</h1>
-
           <Input
             isRequired
             isClearable
@@ -61,7 +80,6 @@ function page() {
             value={email}
             onValueChange={setEmail}
           />
-
           <Input
             isRequired
             isClearable
@@ -75,7 +93,6 @@ function page() {
             value={name}
             onValueChange={setName}
           />
-
           <Input
             isRequired
             type={isVisible ? "text" : "password"}
@@ -94,7 +111,6 @@ function page() {
               )}
               </button>}
           />
-
           <Input
             isRequired
             type={isVisible ? "text" : "password"}
@@ -107,7 +123,6 @@ function page() {
             value={confirmPassword}
             onValueChange={setConfirmPasssword}
           />
-
           <RadioGroup
             className="flex flex-row gap-4"
             isRequired
@@ -119,7 +134,6 @@ function page() {
               <Radio value="faculty">Faculty</Radio>
               <Radio value="student">Student</Radio>
           </RadioGroup>
-
           <Button type="submit" radius="full" className="w-full bg-purple-600">Sign Up</Button>
         </CardBody>
       </Card>

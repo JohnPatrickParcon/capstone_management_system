@@ -1,5 +1,6 @@
 import './globals.css'
 import { Providers } from './providers'
+import { Toaster } from 'react-hot-toast'
 import { Inter } from 'next/font/google'
 import NavHeader from './ClientComponent/NavHeader'
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
         <div className='h-screen bg-green-700'>
           <NavHeader/>
           {children}
+        <Toaster position='bottom-right'/>
         </div>
         </Providers>
       </body>
